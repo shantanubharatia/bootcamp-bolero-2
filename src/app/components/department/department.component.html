@@ -1,0 +1,71 @@
+<div class="container">
+
+    <div class="pageHeader" >
+        <h3>Department List </h3>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addOrEditDepartmentModal" (click)="addNewDepartment()">Add New Department</button>
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Read Only</th>
+                <th scope="col">Mandatory</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let department of departmentService.getDepartments()">
+                <td>{{department.id}}</td>
+                <td>{{department.name}}</td>
+                <td>{{department.readOnly}}</td>
+                <td>{{department.mandatory}}</td>
+                <td class="verticalAlignMiddle">
+                    <div class="actionIconsWrapper" *ngIf="!department.readOnly">
+                        <img class="actionIcons" src="../../../assets/images/edit.svg" alt="" data-bs-toggle="modal" data-bs-target="#addOrEditDepartmentModal" (click)="editDepartment(department.id)">
+                        <img class="actionIcons" src="../../../assets/images/delete.svg" alt="" (click)="deleteDepartment(department)">
+                    </div>    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="addOrEditDepartmentModal" tabindex="-1" aria-labelledby="addOrEditDepartmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addOrEditDepartmentModalLabel">{{isEditMode ? 'Update Department Details' : 'Add New Department'}}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form >
+                <div>
+                    <label class="form-label" for="name">
+                        Name
+                    </label>
+                    <input class="form-control" id="name" name = "name"  type="text" [(ngModel)]="newOrUpdatedDepartment.name">
+                    <div style="margin-top:10px">
+                        <input class="form-check-input" type="checkbox" id="readOnly" name = "readOnly" [(ngModel)]="newOrUpdatedDepartment.readOnly">
+                        <label class="form-label" for="readOnly">
+                            Read Only
+                        </label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="checkbox" id="mandatory" name = "mandatory"[(ngModel)]="newOrUpdatedDepartment.mandatory">
+                        <label class="form-label" for="mandatory">
+                            Mandatory
+                        </label>
+                    </div>
+                    
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button id="closeModalButton" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="saveChanges()">Save changes</button>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

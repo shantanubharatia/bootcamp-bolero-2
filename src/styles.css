@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+.actionIcons
+{
+    width: 15px;
+    margin-right: 10px;
+}
+
+.actionIconsWrapper
+{
+    display: flex;
+}
+
+.verticalAlignMiddle
+{
+    vertical-align: middle;
+}
+
+.pageHeader
+{
+    padding-top: 50px;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+}
